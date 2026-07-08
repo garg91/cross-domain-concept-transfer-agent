@@ -1,0 +1,2007 @@
+{
+  "compression": {
+    "original_problem": "How can I improve adaptive compression by choosing different compressors for different file chunks?",
+    "core_question": "How can I improve adaptive compression by choosing different compressors for different file chunks?",
+    "domain": "compression",
+    "variables": [
+      {
+        "name": "entropy",
+        "description": "Randomness or unpredictability of a chunk.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "repetition",
+        "description": "Amount of repeated local or global patterns.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "chunk type",
+        "description": "Text, binary, tensor, image, archive, log, or mixed data.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "compressor choice",
+        "description": "Selected algorithm or codec.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "compression level",
+        "description": "Intensity setting for a compressor.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "chunk size",
+        "description": "Granularity at which decisions are made.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "compression ratio",
+        "description": "Compressed size divided by original size.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "compression/decompression time",
+        "description": "Runtime cost of encoding and decoding.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "metadata overhead",
+        "description": "Header/model information required to decode chunks.",
+        "type": "constraint",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "entropy",
+        "target": "compression ratio",
+        "relation": "negatively affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "repetition",
+        "target": "dictionary-compressor performance",
+        "relation": "positively affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "chunk type",
+        "target": "best compressor",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "chunk size",
+        "target": "pattern detection",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "compression level",
+        "target": "compression time",
+        "relation": "increases",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "metadata overhead",
+        "target": "net compression gain",
+        "relation": "reduces",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Adaptive Expert Selection",
+      "description": "Different input regions require different specialized models, tools, or policies.",
+      "pattern": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+      "reusable_structure": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback"
+    },
+    "similar_schemas": [
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "trading",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Train a lightweight gating model that routes chunks to specialized compressor experts.",
+        "expected_benefit": "Better size/time tradeoff by matching each chunk to the most suitable policy.",
+        "risk_or_limitation": "Routing metadata and classifier errors may erase compression gains.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Classify chunks into subtypes and apply subtype-specific compression policies rather than a global default.",
+        "expected_benefit": "Better size/time tradeoff by matching each chunk to the most suitable policy.",
+        "risk_or_limitation": "Routing metadata and classifier errors may erase compression gains.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Sample each chunk, estimate compressed size/time for candidate compressors, then choose the lowest expected cost before full compression.",
+        "expected_benefit": "Better size/time tradeoff by matching each chunk to the most suitable policy.",
+        "risk_or_limitation": "Routing metadata and classifier errors may erase compression gains.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Treat compression time, decompression time, memory, and size as schedulable resources with fallback policies.",
+        "expected_benefit": "Better size/time tradeoff by matching each chunk to the most suitable policy.",
+        "risk_or_limitation": "Routing metadata and classifier errors may erase compression gains.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "trading",
+        "imported_mechanism": "Detect hidden regimes and switch policies when the regime changes.",
+        "target_domain_application": "Detect distribution shifts inside large files and switch compression policy at regime boundaries.",
+        "expected_benefit": "Better size/time tradeoff by matching each chunk to the most suitable policy.",
+        "risk_or_limitation": "Routing metadata and classifier errors may erase compression gains.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Compressor routing benchmark",
+        "method": "Compare selector against fixed compressors and oracle.",
+        "metric": "size/time Pareto frontier",
+        "success_condition": "Selector improves Pareto frontier or approaches oracle."
+      },
+      {
+        "test_name": "Cost estimator test",
+        "method": "Predict compressed size/time from samples and features.",
+        "metric": "prediction error",
+        "success_condition": "Low error relative to actual compression."
+      },
+      {
+        "test_name": "Metadata overhead test",
+        "method": "Measure archive overhead per chunk.",
+        "metric": "overhead percent",
+        "success_condition": "Net gains survive metadata cost."
+      }
+    ],
+    "best_next_step": "Implement a small feature extractor plus routing baseline, then compare it against fixed compressors and an oracle on your existing dataset."
+  },
+  "trading": {
+    "original_problem": "How can a trading system adapt its strategy when market behavior changes?",
+    "core_question": "How can a trading system adapt its strategy when market behavior changes?",
+    "domain": "trading",
+    "variables": [
+      {
+        "name": "volatility",
+        "description": "Magnitude and instability of price changes.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "trend strength",
+        "description": "Persistence of directional price movement.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "liquidity",
+        "description": "Ability to enter/exit positions without large price impact.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "hidden market regime",
+        "description": "Latent state such as trending, mean-reverting, crisis, or calm.",
+        "type": "hidden",
+        "examples": []
+      },
+      {
+        "name": "strategy choice",
+        "description": "Selected trading rule or portfolio policy.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "position size",
+        "description": "Capital allocated to a trade.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "transaction cost",
+        "description": "Spread, slippage, and fees.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "return and drawdown",
+        "description": "Performance and downside risk.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "volatility",
+        "target": "risk exposure",
+        "relation": "increases",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "hidden market regime",
+        "target": "best strategy",
+        "relation": "determines",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "liquidity",
+        "target": "transaction cost",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "position size",
+        "target": "drawdown",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Regime-Switching Policy Selection",
+      "description": "A system changes behavior across hidden states, requiring state inference and policy changes.",
+      "pattern": "observations -> hidden state -> selected policy -> outcome -> state update",
+      "reusable_structure": "observations -> hidden state -> selected policy -> outcome -> state update"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Treat market windows like heterogeneous chunks: extract features, infer regime, and route to strategy experts.",
+        "expected_benefit": "Lower risk of applying the wrong strategy during a changed market regime.",
+        "risk_or_limitation": "Backtest overfitting and transaction costs can erase apparent gains.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to trading: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Lower risk of applying the wrong strategy during a changed market regime.",
+        "risk_or_limitation": "Backtest overfitting and transaction costs can erase apparent gains.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Use subtype-specific policy logic: different market regimes receive different risk controls.",
+        "expected_benefit": "Lower risk of applying the wrong strategy during a changed market regime.",
+        "risk_or_limitation": "Backtest overfitting and transaction costs can erase apparent gains.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to trading: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Lower risk of applying the wrong strategy during a changed market regime.",
+        "risk_or_limitation": "Backtest overfitting and transaction costs can erase apparent gains.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to trading: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Lower risk of applying the wrong strategy during a changed market regime.",
+        "risk_or_limitation": "Backtest overfitting and transaction costs can erase apparent gains.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Regime backtest",
+        "method": "Backtest regime-specific strategies out-of-sample.",
+        "metric": "Sharpe, drawdown, turnover",
+        "success_condition": "Improves risk-adjusted return after costs."
+      },
+      {
+        "test_name": "Transaction-cost stress test",
+        "method": "Increase spread/slippage assumptions.",
+        "metric": "net return",
+        "success_condition": "Performance remains robust after costs."
+      }
+    ],
+    "best_next_step": "Build an out-of-sample regime-labeling/backtest notebook before adding any live trading logic."
+  },
+  "materials": {
+    "original_problem": "How can we discover a stable high-temperature superconductor at lower pressure?",
+    "core_question": "How can we discover a stable high-temperature superconductor at lower pressure?",
+    "domain": "materials",
+    "variables": [
+      {
+        "name": "crystal structure",
+        "description": "Atomic arrangement and symmetry.",
+        "type": "measurable/controllable",
+        "examples": []
+      },
+      {
+        "name": "bond length",
+        "description": "Distance between atoms affecting electronic and phonon behavior.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "carrier density",
+        "description": "Number of mobile charge carriers.",
+        "type": "measurable/controllable",
+        "examples": []
+      },
+      {
+        "name": "phonon modes",
+        "description": "Lattice vibrations that can mediate pairing.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "electron-phonon coupling",
+        "description": "Interaction strength between electrons and lattice vibrations.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "formation energy",
+        "description": "Thermodynamic stability of a candidate.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "pressure",
+        "description": "External constraint used to stabilize phases.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "dopants",
+        "description": "Elements introduced to modify structure or carriers.",
+        "type": "controllable",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "crystal structure",
+        "target": "phonon modes",
+        "relation": "determines",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "bond length",
+        "target": "electron-phonon coupling",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "dopants",
+        "target": "carrier density",
+        "relation": "modify",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "pressure",
+        "target": "phase stability",
+        "relation": "increases or changes",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "formation energy",
+        "target": "synthesis plausibility",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Constraint Substitution and Stability Optimization",
+      "description": "Replace an expensive or difficult external constraint with an internal structural mechanism.",
+      "pattern": "desired state -> expensive constraint -> substitute mechanism -> stability test -> optimized candidate",
+      "reusable_structure": "desired state -> expensive constraint -> substitute mechanism -> stability test -> optimized candidate"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to materials: gating model",
+        "expected_benefit": "More systematic candidate generation and earlier rejection of unstable designs.",
+        "risk_or_limitation": "Simulation proxies may miss synthesis constraints or real-world stability.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to materials: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "More systematic candidate generation and earlier rejection of unstable designs.",
+        "risk_or_limitation": "Simulation proxies may miss synthesis constraints or real-world stability.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to materials: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "More systematic candidate generation and earlier rejection of unstable designs.",
+        "risk_or_limitation": "Simulation proxies may miss synthesis constraints or real-world stability.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to materials: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "More systematic candidate generation and earlier rejection of unstable designs.",
+        "risk_or_limitation": "Simulation proxies may miss synthesis constraints or real-world stability.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to materials: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "More systematic candidate generation and earlier rejection of unstable designs.",
+        "risk_or_limitation": "Simulation proxies may miss synthesis constraints or real-world stability.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Candidate stability screening",
+        "method": "Relax candidate structures with simulation or database screening.",
+        "metric": "formation energy",
+        "success_condition": "Candidate is stable or metastable enough to study."
+      },
+      {
+        "test_name": "Property estimation",
+        "method": "Estimate electronic/phonon properties.",
+        "metric": "target property score",
+        "success_condition": "Meets threshold compared with baseline materials."
+      }
+    ],
+    "best_next_step": "Define 5-20 candidate structures and run the cheapest stability/property screening available before deeper simulations."
+  },
+  "algorithms": {
+    "original_problem": "How can symmetry reduce the complexity of solving a polynomial or search problem?",
+    "core_question": "How can symmetry reduce the complexity of solving a polynomial or search problem?",
+    "domain": "algorithms",
+    "variables": [
+      {
+        "name": "state space",
+        "description": "Set of candidate states or solutions.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "invariants",
+        "description": "Properties preserved under transformations.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "equivalence classes",
+        "description": "Groups of states that can be treated as the same.",
+        "type": "hidden",
+        "examples": []
+      },
+      {
+        "name": "constraints",
+        "description": "Rules that valid solutions must satisfy.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "branching factor",
+        "description": "Number of choices at each search step.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "representation",
+        "description": "How the problem is encoded.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "runtime",
+        "description": "Execution time or complexity.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "invariants",
+        "target": "search space",
+        "relation": "reduce",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "equivalence classes",
+        "target": "branching factor",
+        "relation": "reduce",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "representation",
+        "target": "runtime",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "constraints",
+        "target": "valid solutions",
+        "relation": "define",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Symmetry Reduction",
+      "description": "Exploit invariance or equivalence classes to reduce search or solution complexity.",
+      "pattern": "problem -> invariance/symmetry -> equivalence classes -> reduced search space -> solution",
+      "reusable_structure": "problem -> invariance/symmetry -> equivalence classes -> reduced search space -> solution"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to algorithms: gating model",
+        "expected_benefit": "Reduced search complexity while preserving correctness.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to algorithms: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Reduced search complexity while preserving correctness.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to algorithms: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "Reduced search complexity while preserving correctness.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to algorithms: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Reduced search complexity while preserving correctness.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to algorithms: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Reduced search complexity while preserving correctness.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Search-space reduction test",
+        "method": "Compare brute force vs symmetry-reduced solver.",
+        "metric": "states visited/runtime",
+        "success_condition": "Reduction preserves correctness and lowers runtime."
+      },
+      {
+        "test_name": "Correctness proof/check",
+        "method": "Use tests or formal proof for transformations.",
+        "metric": "pass/fail",
+        "success_condition": "Reduced solver matches known answers."
+      }
+    ],
+    "best_next_step": "Identify invariants/equivalence classes and compare a reduced solver against brute force on small cases."
+  },
+  "operating systems": {
+    "original_problem": "How should an operating system schedule tasks with different CPU, I/O, memory, and latency needs?",
+    "core_question": "How should an operating system schedule tasks with different CPU, I/O, memory, and latency needs?",
+    "domain": "operating systems",
+    "variables": [
+      {
+        "name": "CPU demand",
+        "description": "How much computation a task needs.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "I/O demand",
+        "description": "How much waiting on disk/network/device operations occurs.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "memory pressure",
+        "description": "Memory requirement and contention.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "latency sensitivity",
+        "description": "How delay-sensitive the task is.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "priority",
+        "description": "Relative importance of task execution.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "scheduler policy",
+        "description": "Rule for selecting which task runs.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "throughput/fairness",
+        "description": "Aggregate performance and fairness outcome.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "CPU demand",
+        "target": "scheduler policy",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "I/O demand",
+        "target": "waiting time",
+        "relation": "increases",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "latency sensitivity",
+        "target": "priority",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "context-switch cost",
+        "target": "throughput",
+        "relation": "reduces",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Adaptive Expert Selection",
+      "description": "Different input regions require different specialized models, tools, or policies.",
+      "pattern": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+      "reusable_structure": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "trading",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to operating systems: gating model",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to operating systems: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to operating systems: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to operating systems: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "trading",
+        "imported_mechanism": "Detect hidden regimes and switch policies when the regime changes.",
+        "target_domain_application": "Adapt this mechanism to operating systems: Detect hidden regimes and switch policies when the regime changes.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Scheduling benchmark",
+        "method": "Simulate workloads with mixed CPU/I/O/latency profiles.",
+        "metric": "throughput/latency/fairness",
+        "success_condition": "Improves selected metrics without starving jobs."
+      }
+    ],
+    "best_next_step": "Create a workload simulator and compare a simple adaptive scheduler against FIFO/round-robin baselines."
+  },
+  "databases": {
+    "original_problem": "How can a database choose the best query execution plan before running the query?",
+    "core_question": "How can a database choose the best query execution plan before running the query?",
+    "domain": "databases",
+    "variables": [
+      {
+        "name": "table size",
+        "description": "Number of rows and storage size.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "index availability",
+        "description": "Indexes usable by the query.",
+        "type": "measurable/controllable",
+        "examples": []
+      },
+      {
+        "name": "join order",
+        "description": "Order in which tables are joined.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "selectivity",
+        "description": "Fraction of rows passing a predicate.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "cardinality estimate",
+        "description": "Predicted row counts during planning.",
+        "type": "hidden",
+        "examples": []
+      },
+      {
+        "name": "query plan",
+        "description": "Chosen execution strategy.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "execution time",
+        "description": "Runtime latency of query.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "selectivity",
+        "target": "cardinality estimate",
+        "relation": "determines",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "cardinality estimate",
+        "target": "query plan",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "index availability",
+        "target": "execution time",
+        "relation": "reduces when useful",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "join order",
+        "target": "execution time",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Cost-Based Planning",
+      "description": "Estimate the cost of candidate strategies before committing to execution.",
+      "pattern": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator",
+      "reusable_structure": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to databases: gating model",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to databases: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to databases: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to databases: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to databases: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Plan-estimate calibration",
+        "method": "Compare estimated vs actual plan costs.",
+        "metric": "cost error and query latency",
+        "success_condition": "Better plan choices than baseline optimizer."
+      }
+    ],
+    "best_next_step": "Collect query-plan features, estimate costs, and compare chosen plans against actual runtimes."
+  },
+  "medicine": {
+    "original_problem": "How can treatment be personalized for different patient subtypes while preserving safety?",
+    "core_question": "How can treatment be personalized for different patient subtypes while preserving safety?",
+    "domain": "medicine",
+    "variables": [
+      {
+        "name": "symptoms",
+        "description": "Observed patient complaints or signs.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "biomarkers",
+        "description": "Lab or biological measurements.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "medical history",
+        "description": "Prior conditions, medications, and context.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "disease subtype",
+        "description": "Latent patient or disease category.",
+        "type": "hidden",
+        "examples": []
+      },
+      {
+        "name": "treatment",
+        "description": "Selected intervention.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "dosage",
+        "description": "Amount and schedule of intervention.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "side effects",
+        "description": "Negative outcomes or safety events.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "clinical outcome",
+        "description": "Measured patient improvement or decline.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "disease subtype",
+        "target": "best treatment",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "biomarkers",
+        "target": "disease subtype",
+        "relation": "help infer",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "dosage",
+        "target": "side effects",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "medical history",
+        "target": "treatment safety",
+        "relation": "constrains",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Adaptive Expert Selection",
+      "description": "Different input regions require different specialized models, tools, or policies.",
+      "pattern": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+      "reusable_structure": "input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "trading",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to medicine: gating model",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "High-stakes domain: any generated policy requires clinical validation and regulatory review.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to medicine: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "High-stakes domain: any generated policy requires clinical validation and regulatory review.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to medicine: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "High-stakes domain: any generated policy requires clinical validation and regulatory review.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to medicine: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "High-stakes domain: any generated policy requires clinical validation and regulatory review.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "trading",
+        "imported_mechanism": "Detect hidden regimes and switch policies when the regime changes.",
+        "target_domain_application": "Adapt this mechanism to medicine: Detect hidden regimes and switch policies when the regime changes.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "High-stakes domain: any generated policy requires clinical validation and regulatory review.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Retrospective subgroup validation",
+        "method": "Evaluate treatment policy on historical validated data.",
+        "metric": "outcome and adverse event rate",
+        "success_condition": "Improves outcome without violating safety constraints."
+      }
+    ],
+    "best_next_step": "Use only validated retrospective/public data first; measure subgroup performance and safety metrics."
+  },
+  "robotics": {
+    "original_problem": "How can a robot adapt its behavior across different environments and uncertainty levels?",
+    "core_question": "How can a robot adapt its behavior across different environments and uncertainty levels?",
+    "domain": "robotics",
+    "variables": [
+      {
+        "name": "sensor input",
+        "description": "Camera, lidar, proprioception, force, or other observations.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "environment type",
+        "description": "Terrain/object/task context.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "robot state",
+        "description": "Joint angles, velocity, pose, and internal state.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "uncertainty",
+        "description": "Ambiguity or noise in perception/control.",
+        "type": "hidden",
+        "examples": []
+      },
+      {
+        "name": "control policy",
+        "description": "Chosen action-generation method.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "energy use",
+        "description": "Power or battery consumption.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "task success",
+        "description": "Whether the robot completes the goal.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "sensor input",
+        "target": "environment type",
+        "relation": "helps infer",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "environment type",
+        "target": "best control policy",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "uncertainty",
+        "target": "failure risk",
+        "relation": "increases",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "control policy",
+        "target": "task success",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Regime-Switching Policy Selection",
+      "description": "A system changes behavior across hidden states, requiring state inference and policy changes.",
+      "pattern": "observations -> hidden state -> selected policy -> outcome -> state update",
+      "reusable_structure": "observations -> hidden state -> selected policy -> outcome -> state update"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to robotics: gating model",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to robotics: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to robotics: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to robotics: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to robotics: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Simulated environment sweep",
+        "method": "Test policies across terrain/task variations.",
+        "metric": "success/collision/energy",
+        "success_condition": "Improves success and safety across environments."
+      }
+    ],
+    "best_next_step": "Test the transferred policy in simulation across controlled environment variations before real hardware."
+  },
+  "compiler optimization": {
+    "original_problem": "How can a compiler choose the best optimization strategy for different code sections?",
+    "core_question": "How can a compiler choose the best optimization strategy for different code sections?",
+    "domain": "compiler optimization",
+    "variables": [
+      {
+        "name": "code structure",
+        "description": "Loops, branches, memory accesses, and data dependencies.",
+        "type": "measurable",
+        "examples": []
+      },
+      {
+        "name": "target hardware",
+        "description": "CPU/GPU/cache/vector architecture.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "optimization pass",
+        "description": "Transformation applied by compiler.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "compile-time budget",
+        "description": "Time allowed to search optimizations.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "runtime",
+        "description": "Execution time of produced program.",
+        "type": "output",
+        "examples": []
+      },
+      {
+        "name": "binary size",
+        "description": "Size of compiled output.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "code structure",
+        "target": "best optimization pass",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "target hardware",
+        "target": "runtime",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "compile-time budget",
+        "target": "optimization search",
+        "relation": "constrains",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "optimization pass",
+        "target": "binary size",
+        "relation": "affects",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Cost-Based Planning",
+      "description": "Estimate the cost of candidate strategies before committing to execution.",
+      "pattern": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator",
+      "reusable_structure": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Adapt this mechanism to compiler optimization: gating model",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to compiler optimization: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Adapt this mechanism to compiler optimization: Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Adapt this mechanism to compiler optimization: Estimate candidate plan cost before committing to full execution.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Adapt this mechanism to compiler optimization: Borrow resource-aware scheduling and fallback policies under constraints.",
+        "expected_benefit": "Improves decision quality by matching policy to observed structure and constraints.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Benchmark suite evaluation",
+        "method": "Run optimized outputs across representative programs.",
+        "metric": "runtime/compile-time/binary size",
+        "success_condition": "Improves runtime within compile-time budget."
+      }
+    ],
+    "best_next_step": "Run a benchmark suite with a pass-selection baseline and compare runtime, compile time, and binary size."
+  },
+  "AI agents": {
+    "original_problem": "How can an AI agent choose the right tool or model for a user task?",
+    "core_question": "How can an AI agent choose the right tool or model for a user task?",
+    "domain": "AI agents",
+    "variables": [
+      {
+        "name": "user intent",
+        "description": "Goal implied by the user request.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "task type",
+        "description": "Math, coding, search, writing, planning, vision, etc.",
+        "type": "hidden/measurable",
+        "examples": []
+      },
+      {
+        "name": "available tools",
+        "description": "APIs, databases, solvers, browsers, code execution, or models.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "tool choice",
+        "description": "Selected external tool or model.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "latency/cost budget",
+        "description": "Time and money allowed for a response.",
+        "type": "constraint",
+        "examples": []
+      },
+      {
+        "name": "verification method",
+        "description": "How the result is checked.",
+        "type": "controllable",
+        "examples": []
+      },
+      {
+        "name": "task success",
+        "description": "Correctness or user satisfaction.",
+        "type": "output",
+        "examples": []
+      }
+    ],
+    "relationships": [
+      {
+        "source": "user intent",
+        "target": "tool choice",
+        "relation": "influences",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "task type",
+        "target": "best model/tool",
+        "relation": "determines",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "latency/cost budget",
+        "target": "tool choice",
+        "relation": "constrains",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      },
+      {
+        "source": "verification method",
+        "target": "task success",
+        "relation": "improves",
+        "direction": "source_to_target",
+        "confidence": 0.7
+      }
+    ],
+    "abstract_schema": {
+      "name": "Cost-Based Planning",
+      "description": "Estimate the cost of candidate strategies before committing to execution.",
+      "pattern": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator",
+      "reusable_structure": "candidate plans -> estimated cost -> selected plan -> measured result -> updated estimator"
+    },
+    "similar_schemas": [
+      {
+        "domain": "compression",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "mixture-of-experts",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "medicine",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "database query planning",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      },
+      {
+        "domain": "operating systems",
+        "schema_name": "Adaptive Expert Selection",
+        "similarity_reason": "Shares the structure: input -> feature extraction -> hidden type/regime inference -> expert/policy selection -> feedback",
+        "transferable_mechanisms": [
+          "gating model",
+          "expert routing",
+          "fallback policy",
+          "confidence-based escalation"
+        ]
+      }
+    ],
+    "transferred_ideas": [
+      {
+        "source_domain": "compression",
+        "imported_mechanism": "gating model",
+        "target_domain_application": "Break large tasks into chunks and route each chunk to the best model/tool.",
+        "expected_benefit": "Higher task success with lower unnecessary tool cost and better verification.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.95
+      },
+      {
+        "source_domain": "mixture-of-experts",
+        "imported_mechanism": "Use a lightweight gating model to route inputs to specialized experts.",
+        "target_domain_application": "Adapt this mechanism to AI agents: Use a lightweight gating model to route inputs to specialized experts.",
+        "expected_benefit": "Higher task success with lower unnecessary tool cost and better verification.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.88
+      },
+      {
+        "source_domain": "medicine",
+        "imported_mechanism": "Use subtype-specific intervention logic instead of a one-size-fits-all policy.",
+        "target_domain_application": "Triage tasks by risk and route high-risk tasks to stronger verification.",
+        "expected_benefit": "Higher task success with lower unnecessary tool cost and better verification.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.81
+      },
+      {
+        "source_domain": "database query planning",
+        "imported_mechanism": "Estimate candidate plan cost before committing to full execution.",
+        "target_domain_application": "Estimate tool cost and success probability before selecting a tool chain.",
+        "expected_benefit": "Higher task success with lower unnecessary tool cost and better verification.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.74
+      },
+      {
+        "source_domain": "operating systems",
+        "imported_mechanism": "Borrow resource-aware scheduling and fallback policies under constraints.",
+        "target_domain_application": "Schedule tool calls under latency, cost, and priority constraints.",
+        "expected_benefit": "Higher task success with lower unnecessary tool cost and better verification.",
+        "risk_or_limitation": "The analogy may be structurally incomplete; verify against domain-specific baselines.",
+        "score": 0.67
+      }
+    ],
+    "verification_plan": [
+      {
+        "test_name": "Tool-routing eval",
+        "method": "Run benchmark tasks requiring different tools.",
+        "metric": "success/cost/latency",
+        "success_condition": "Improves success rate or cost-adjusted performance."
+      }
+    ],
+    "best_next_step": "Build a task-routing eval set and compare rule-based routing, LLM routing, and oracle routing."
+  }
+}

@@ -1,0 +1,9 @@
+[project]
+name = "cross-domain-concept-agent"
+version = "0.1.0"
+description = "MVP for schema-guided cross-domain concept transfer"
+requires-python = ">=3.10"
+dependencies = ["pydantic>=2.6.0", "rich>=13.7.0"]
+
+[tool.pytest.ini_options]
+pythonpath = ["."]
